@@ -62,7 +62,7 @@ var filters = [true,true,true];
 
 var spawns = [[1,5],[22,5],[3,11],[23,12],[16,17],[5,23],[23,25],[1,28],[15,28]];
 //zuk spawns [9,7],[18,7]
- 
+
 var mode = 0;
 var selected = [16,5];
 var mobs = [];
@@ -220,6 +220,36 @@ document.addEventListener('keydown',function(e){
 			break;
 		case 40:
 			reset();
+			drawWave();
+			break;
+		case 81:
+			mode = 1
+			place();
+			drawWave();
+			break;
+		case 87:
+			mode = 2
+			place();
+			drawWave();
+			break;
+		case 69:
+			mode = 3
+			place();
+			drawWave();
+			break;
+		case 82:
+			mode = 4
+			place();
+			drawWave();
+			break;
+		case 84:
+			mode = 5
+			place();
+			drawWave();
+			break;
+		case 89:
+			mode = 6
+			place();
 			drawWave();
 			break;
 	}
@@ -552,9 +582,8 @@ if(showZukSpots){ctx.globalAlpha = 0.35} else {ctx.globalAlpha = 0}
 	}
 }
 function randomWave(){
-	mobs = []
 	mode = 0
-	reset();
+	remove();
 	let wave = document.getElementById("wave").value;
 	let loaded = waveList[wave-1]
 	mobs.push(nibblers[Math.floor(Math.random()*3)]);
