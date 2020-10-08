@@ -14,6 +14,13 @@
 button {
     margin-bottom: 3px;
 }
+	.south {
+		-webkit-transform:rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+	}
 </style>
 </head>
 <body>
@@ -33,23 +40,20 @@ button {
 </div>
 <div style="margin-bottom: 10px; width: 700px; text-align: center;">
     &nbsp;&nbsp;&nbsp;Toggle: &nbsp;
+    <button onclick="toggleNS()">N/S</button>
     <button onclick="togglePillar(0)">West</button>
     <button onclick="togglePillar(1)">North</button>
     <button onclick="togglePillar(2)">South</button>
     <button onclick="togglePlayerLoS()">LoS</button>
     <button onclick="toggleSpawns()">Spawns</button>
-    <button onclick="toggleZukSpots()">Zuk Spots</button>
+    <button onclick="toggleZukSpots()">Zuk</button>
     <button onclick="toggleNibblerSpawn()">Nib Spawn</button>
-    &nbsp;&nbsp;Random&nbsp;
+    <button onclick="toggleChecker()">Checkers</button>
     <input id="wave" type="number" style="width: 64px; text-align: center" placeholder=" Wave #" max="66" min="1">
     <button onClick="randomWave()">GO</button>
 </div>
-<canvas id="map" onselectstart="return false" oncontextmenu="return false" style="
-  -webkit-transform:rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -ms-transform: rotate(180deg);
-  -o-transform: rotate(180deg);
-  transform: rotate(180deg);"></canvas>
+<canvas id="map" class="south" onselectstart="return false" oncontextmenu="return false" style="
+  "></canvas>
 	<br>Based on code from <a href="https://bistools.github.io/inferno.html">Backseat's tool</a>. All credit to him.
 <script>
 var SIZE = [1,2,3,3,4,3,4,1,1,1];
@@ -59,6 +63,7 @@ var zuk_safe_spots = [[3,0],[9,0],[14,0],[19,0],[25,0]];
 
 var pillars = [[0,9],[17,7],[10,23]];
 var filters = [true,true,true];
+	var south = true;
 
 var spawns = [[1,5],[22,5],[3,11],[23,12],[16,17],[5,23],[23,25],[1,28],[15,28]];
 //zuk spawns [9,7],[18,7]
@@ -71,6 +76,7 @@ var showSpawns = true;
 var showPlayerLoS = true;
 var showNibblerSpawn = true;
 var showZukSpots = true;
+var checker = true;
 var img_sources = [
 	"",
 	"bat-sized.png",
@@ -79,6 +85,18 @@ var img_sources = [
 	"melee-sized.png",
 	"ranger-sized.png",
 	"mage-sized.png",
+	"nibbler-sized-west.png",	
+	"nibbler-sized-north.png",
+	"nibbler-sized-south.png",
+];
+var img_sources_north = [
+	"",
+	"bat-sized - Copy.png",
+	"blob-sized - Copy.png",
+	"blob-sized - Copy.png",
+	"melee-sized - Copy.png",
+	"ranger-sized - Copy.png",
+	"mage-sized - Copy.png",
 	"nibbler-sized-west.png",	
 	"nibbler-sized-north.png",
 	"nibbler-sized-south.png",
@@ -268,8 +286,16 @@ function toggleZukSpots(){
 	showZukSpots = !showZukSpots;
 	drawWave();
 }
+function toggleNS(){
+		document.getElementById("map").classList.toggle("south")	
+	drawWave();
+}
 function toggleNibblerSpawn(){
 	showNibblerSpawn = !showNibblerSpawn;
+	drawWave();
+}
+function toggleChecker(){
+	checker = !checker;
 	drawWave();
 }
 function meleeDig(){
@@ -498,8 +524,10 @@ function drawWave(){
 	ctx.globalAlpha = 1;
 	ctx.clearRect(0,0,can.width,can.height);
 	var colors = ["cyan","grey","yellow","blue","orange","lime","red"]
+	if (checker==true){checkerColor="#eee"}
+	else {checkerColor="#fff"}
 	for(var i=0;i<870;i++){
-		ctx.fillStyle = (i%2)?"#fff":"#eee";
+		ctx.fillStyle = (i%2)?"#fff":checkerColor;
 		ctx.fillRect(i%29*size,Math.floor(i/29)*size,size,size)
 	}
 	//pillars
@@ -551,7 +579,10 @@ if(showZukSpots){ctx.globalAlpha = 0.35} else {ctx.globalAlpha = 0}
 		ctx.strokeRect(selected[0]*size,(selected[1]+1)*size,s*size,-s*size)
 	}
 	var current_i = new Image();
-	current_i.src = img_sources[mode]
+	if ( document.getElementById("map").classList.contains('south') ){
+	current_i.src = img_sources[mode]} else {
+		current_i.src = img_sources_north[mode]
+	}
 	ctx.drawImage(current_i, selected[0]*size,(selected[1]-s+1)*size)
 	var offset = 29*size;
 	for(var i=0;i<tape.length;i++){
@@ -572,7 +603,10 @@ if(showZukSpots){ctx.globalAlpha = 0.35} else {ctx.globalAlpha = 0}
 	}
 	for(var i=0;i<mobs.length;i++){
 		var mob_i = new Image();
-		mob_i.src = img_sources[mobs[i][2]]
+		if ( document.getElementById("map").classList.contains('south') ){
+		mob_i.src = img_sources[mobs[i][2]]} else {
+			mob_i.src = img_sources_north[mobs[i][2]]
+		}
 		ctx.drawImage(mob_i, mobs[i][0]*size,(mobs[i][1]-SIZE[mobs[i][2]]+1)*size)
 	}
 }
