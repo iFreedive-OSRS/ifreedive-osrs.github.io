@@ -23,7 +23,7 @@ button {
 	}
 </style>
 </head>
-<body>
+<body id="container">
 <div style="margin-bottom: 10px; width: 700px; text-align: center;">
     <button onclick="remove()">Clear</button>
     &nbsp;
@@ -45,12 +45,13 @@ button {
     <button onclick="togglePillar(1)">North</button>
     <button onclick="togglePillar(2)">South</button>
     <button onclick="togglePlayerLoS()">LoS</button>
-    <button onclick="toggleSpawns()">Spawns</button>
+    <!--<button onclick="toggleSpawns()">Spawns</button>
     <button onclick="toggleZukSpots()">Zuk</button>
     <button onclick="toggleNibblerSpawn()">Nib Spawn</button>
-    <button onclick="toggleChecker()">Checkers</button>
+    <button onclick="toggleChecker()">Checkers</button>-->
     <input id="wave" type="number" style="width: 64px; text-align: center" placeholder=" Wave #" max="66" min="1">
-    <button onClick="randomWave()">GO</button>
+    <button onClick="randomWave()">GO</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <button onClick="copySpawnURL()">Copy Spawn URL</button>
 </div>
 <canvas id="map" class="south" onselectstart="return false" oncontextmenu="return false" style="
   "></canvas>
@@ -59,7 +60,7 @@ button {
 var SIZE = [1,2,3,3,4,3,4,1,1,1];
 var RANGE = [10,4,15,15,1,15,15,1,1,1];
 var CD = [0,3,6,6,4,4,4,0];
-var zuk_safe_spots = [[3,0],[9,0],[14,0],[19,0],[25,0]];
+var zuk_safe_spots = [[3,0],[9,0],[19,0],[25,0]];
 
 var pillars = [[0,9],[17,7],[10,23]];
 var filters = [true,true,true];
@@ -187,7 +188,6 @@ document.addEventListener('DOMContentLoaded',function(){
 		var lx = parseInt(spawn[i].slice(0,2))
 		var ly = parseInt(spawn[i].slice(2,4))
 		var lm = parseInt(spawn[i].slice(4))
-		console.log(spawn[i].slice(2,3))
 		mobs.push([lx, ly, lm, lx, ly, 0])
 	}
    drawWave()
@@ -279,6 +279,14 @@ document.addEventListener('keydown',function(e){
 document.addEventListener('keydown',function(e){
 	//keyboard shortcuts for future?
 });
+	function copySpawnURL(){
+		var url = "https://ifreedive-osrs.github.io/?"
+		for(var i=0;i<mobs.length;i++){
+			url = url.concat(("00" + mobs[i][0]).slice(-2)).concat(("00" + mobs[i][1]).slice(-2)).concat(mobs[i][2]).concat(".")
+		}
+		copyQ(url);
+		alert("Spawn URL Copied!")
+	}
 function togglePillar(x){
 	filters[x] = !filters[x];
 	drawWave();
@@ -636,6 +644,17 @@ function randomWave(){
 	console.log(mobs);
 	drawWave();
 }
+	function copyQ(val) {
+
+        var container = document.getElementById("container");
+        var inp = document.createElement("input");
+        inp.type = "text";
+        container.appendChild(inp); 
+        inp.value = val;
+        inp.select();
+        document.execCommand("Copy");
+        container.removeChild(container.lastChild);
+    }
 </script>
 </body>
 </html>
