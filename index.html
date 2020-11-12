@@ -181,6 +181,15 @@ var size = 20;
 can.width = size*(29+6)
 can.height = size*30
 document.addEventListener('DOMContentLoaded',function(){
+	var spawn = parent.location.search.replace("?", "").split(".")
+	console.log(spawn)
+	for (i = 0; i < spawn.length; i++) {
+		var lx = parseInt(spawn[i].slice(0,2))
+		var ly = parseInt(spawn[i].slice(2,4))
+		var lm = parseInt(spawn[i].slice(4))
+		console.log(spawn[i].slice(2,3))
+		mobs.push([lx, ly, lm, lx, ly, 0])
+	}
    drawWave()
 });
 document.getElementById("map").addEventListener('mousedown',function(e){
