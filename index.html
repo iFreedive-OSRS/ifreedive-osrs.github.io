@@ -199,14 +199,14 @@ document.addEventListener('DOMContentLoaded',function(){
 	var spawn = parent.location.search.replace("?", "").split(".")
 	console.log(spawn)
 	for (i = 0; i < spawn.length; i++) {
-		if(spawn[i]=='degeN'){toggleNS()}
-		if(spawn[i]=='noWe'){togglePillar(0)}
-		if(spawn[i]=='noN'){togglePillar(1)}
-		if(spawn[i]=='noS'){togglePillar(2)}
-		var lx = parseInt(spawn[i].slice(0,2))
+		if(spawn[i]==='degeN'){toggleNS()}
+		else if(spawn[i]==='noWe'){togglePillar(0)}
+		else if(spawn[i]==='noN'){togglePillar(1)}
+		else if(spawn[i]==='noS'){togglePillar(2)}
+		else {var lx = parseInt(spawn[i].slice(0,2))
 		var ly = parseInt(spawn[i].slice(2,4))
 		var lm = parseInt(spawn[i].slice(4))
-		mobs.push([lx, ly, lm, lx, ly, 0])
+		mobs.push([lx, ly, lm, lx, ly, 0])}
 	}
    drawWave()
 });
