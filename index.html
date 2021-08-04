@@ -95,7 +95,7 @@ var img_sources = [
 	"bat-sized.png",
 	"blob-sized.png",
 	"blob-sized.png",
-	"melee-miniblob-sized.png",
+	"nibbler-sized-west.png",	
 	"melee-sized.png",
 	"ranger-sized.png",
 	"mage-sized.png",
@@ -108,7 +108,7 @@ var img_sources_north = [
 	"bat-sized - Copy.png",
 	"blob-sized - Copy.png",
 	"blob-sized - Copy.png",
-	"melee-miniblob-sized - Copy.png",
+	"nibbler-sized-west.png",	
 	"melee-sized - Copy.png",
 	"ranger-sized - Copy.png",
 	"mage-sized - Copy.png",
@@ -193,7 +193,7 @@ var waveList = [
 var can = document.getElementById("map")
 var ctx = can.getContext("2d");
 var size = 20;
-can.width = size*(29+6)
+can.width = size*(29+9)
 can.height = size*30
 document.addEventListener('DOMContentLoaded',function(){
 	var spawn = parent.location.search.replace("?", "").split(".")
@@ -613,7 +613,7 @@ if(showZukSpots){ctx.globalAlpha = 0.35} else {ctx.globalAlpha = 0}
 		var r = RANGE[mobs[i][2]];
 		var c = colors[mobs[i][2]];
 		ctx.fillStyle = ctx.strokeStyle = c;
-		if (mobs[i][2] < 8){
+		if (mobs[i][2] < 8 && mobs[i][2] != 4){
 			ctx.fillRect(mobs[i][0]*size,(mobs[i][1]+1)*size,1*size,-1*size)
 			ctx.strokeRect(mobs[i][0]*size+1,(mobs[i][1]+1)*size-1,s*size,-s*size)
 		}
@@ -628,7 +628,7 @@ if(showZukSpots){ctx.globalAlpha = 0.35} else {ctx.globalAlpha = 0}
 	drawLOS(selected[0],selected[1],s,r,mode>0)
 	ctx.fillStyle = ctx.strokeStyle = c
 	var blobAlready = false;
-	if (mode < 8){
+	if (mode < 8 && mobs[i][2] != 4){
 		ctx.fillRect(selected[0]*size,(selected[1]+1)*size,1*size,-1*size)
 		ctx.strokeRect(selected[0]*size,(selected[1]+1)*size,s*size,-s*size)
 	}
@@ -641,13 +641,13 @@ if(showZukSpots){ctx.globalAlpha = 0.35} else {ctx.globalAlpha = 0}
 	var offset = 29*size;
 	for(var i=0;i<tape.length;i++){
 		ctx.fillStyle = i%2==0? "#ddd" : "#eee";
-		ctx.fillRect(offset,size*(i),size*6,size)
+		ctx.fillRect(offset,size*(i),size*9,size)
 		for(var j=0;j<tape[i].length;j++){
 
 			var t = tape[i][j]
 			if (i>=3){console.log(tape[i-3][j])}
 			if(t>0){ 
-				ctx.fillStyle = ["","grey","yellow","blue","red","orange","lime","red"][t]
+				ctx.fillStyle = ["","grey","yellow","blue","purple","orange","lime","red"][t]
 				ctx.fillRect(offset+size*(j),size*(i),size,size)
 			}else if((t==-2 || t==-3) && i>=3 && (tape[i-3][j]==2 || tape[i-3][j]==3)){
 				ctx.fillStyle = "black";
