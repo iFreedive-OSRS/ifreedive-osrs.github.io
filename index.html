@@ -71,6 +71,9 @@ var spawns = [[1,5],[22,5],[3,11],[23,12],[16,17],[5,23],[23,25],[1,28],[15,28]]
 
 var mode = 0;
 var degen = false;
+var pillarW = true;
+var pillarN = true;
+var pillarS = true;
 var selected = [16,5];
 var mobs = [];
 var tape = [];
@@ -189,6 +192,9 @@ document.addEventListener('DOMContentLoaded',function(){
 	console.log(spawn)
 	for (i = 0; i < spawn.length; i++) {
 		if(spawn[i]=='degeN'){toggleNS()}
+		if(spawn[i]=='noW'){togglePillar(0)}
+		if(spawn[i]=='noN'){togglePillar(1)}
+		if(spawn[i]=='noS'){togglePillar(2)}
 		var lx = parseInt(spawn[i].slice(0,2))
 		var ly = parseInt(spawn[i].slice(2,4))
 		var lm = parseInt(spawn[i].slice(4))
@@ -293,12 +299,18 @@ document.addEventListener('keydown',function(e){
 		for(var i=0;i<mobs.length;i++){
 			url = url.concat(("00" + mobs[i][0]).slice(-2)).concat(("00" + mobs[i][1]).slice(-2)).concat(mobs[i][2]).concat(".")
 		}
+		if(pillarW=false){url=url.concat(".noW")}
+		if(pillarN=false){url=url.concat(".noN")}
+		if(pillarS=false){url=url.concat(".noS")}
 		if(degen){url = url.concat(".degeN")}
 		copyQ(url);
 		alert("Spawn URL Copied!")
 	}
 function togglePillar(x){
 	filters[x] = !filters[x];
+	if(x=0){pillarW = !pillarW};
+	if(x=1){pillarN = !pillarN};
+	if(x=2){pillarS = !pillarS};
 	drawWave();
 }
 function toggleSpawns(){
