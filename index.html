@@ -95,7 +95,7 @@ var img_sources = [
 	"bat-sized.png",
 	"blob-sized.png",
 	"blob-sized.png",
-	"melee-miniblob-sized.png",
+	"nibbler-sized-west.png",
 	"melee-sized.png",
 	"ranger-sized.png",
 	"mage-sized.png",
@@ -108,7 +108,7 @@ var img_sources_north = [
 	"bat-sized - Copy.png",
 	"blob-sized - Copy.png",
 	"blob-sized - Copy.png",
-	"melee-miniblob-sized - Copy.png",
+	"nibbler-sized-west.png",
 	"melee-sized - Copy.png",
 	"ranger-sized - Copy.png",
 	"mage-sized - Copy.png",
@@ -574,7 +574,7 @@ function drawLOS(x,y,s,r,isNPC,color="red"){
 function drawWave(){
 	ctx.globalAlpha = 1;
 	ctx.clearRect(0,0,can.width,can.height);
-	var colors = ["cyan","grey","yellow","blue","red","orange","lime","red"]
+	var colors = ["cyan","grey","yellow","blue","purple","orange","lime","red"]
 	if (checker==true){checkerColor="#eee"}
 	else {checkerColor="#fff"}
 	for(var i=0;i<870;i++){
@@ -644,7 +644,7 @@ if(showZukSpots){ctx.globalAlpha = 0.35} else {ctx.globalAlpha = 0}
 			var t = tape[i][j]
 			if (i>=3){console.log(tape[i-3][j])}
 			if(t>0){ 
-				ctx.fillStyle = ["","grey","yellow","blue","red","orange","lime","red"][t]
+				ctx.fillStyle = ["","grey","yellow","blue","purple","orange","lime","red"][t]
 				ctx.fillRect(offset+size*(j),size*(i),size,size)
 			}else if((t==-2 || t==-3) && i>=3 && (tape[i-3][j]==2 || tape[i-3][j]==3)){
 				ctx.fillStyle = "black";
