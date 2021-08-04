@@ -4,58 +4,66 @@
 <title>Inferno LOS</title>
 <style>
 #map {
-    border: 1px solid black;
-    display: inline-block;
+	border: 1px solid black;
+	display: inline-block;
 }
 #tape {
-    display: inline-block;
-    vertical-align: top;
+	display: inline-block;
+	vertical-align: top;
 }
 button {
-    margin-bottom: 3px;
+	margin-bottom: 3px;
 }
-	.south {
-		-webkit-transform:rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -ms-transform: rotate(180deg);
-  -o-transform: rotate(180deg);
-  transform: rotate(180deg);
-	}
+.south {
+	-webkit-transform: rotate(180deg);
+	-moz-transform: rotate(180deg);
+	-ms-transform: rotate(180deg);
+	-o-transform: rotate(180deg);
+	transform: rotate(180deg);
+}
 </style>
 </head>
 <body id="container">
 <div style="margin-bottom: 10px; width: 700px; text-align: center;">
-    <button onclick="remove()">Clear</button>
-    &nbsp;
-    <button onclick="place()">Place NPC</button>&nbsp;
-    <button onclick="meleeDig()">Melee Dig</button>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <button onclick="setMode(0)">Player</button>&nbsp;
-    <button onclick="setMode(1)">Bat</button>&nbsp;
-    <button onclick="setMode(2)">Blob 1</button>&nbsp;
-    <button onclick="setMode(3)">Blob 2</button>&nbsp;
-    <button onclick="setMode(5)">Melee</button>&nbsp;
-    <button onclick="setMode(6)">Ranger</button>&nbsp;
-    <button onclick="setMode(7)">Mager</button>
+  <button onclick="remove()">Clear</button>
+  &nbsp;
+  <button onclick="place()">Place NPC</button>
+  &nbsp;
+  <button onclick="meleeDig()">Melee Dig</button>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <button onclick="setMode(0)">Player</button>
+  &nbsp;
+  <button onclick="setMode(1)">Bat</button>
+  &nbsp;
+  <button onclick="setMode(2)">Blob 1</button>
+  &nbsp;
+  <button onclick="setMode(3)">Blob 2</button>
+  &nbsp;
+  <button onclick="setMode(5)">Melee</button>
+  &nbsp;
+  <button onclick="setMode(6)">Ranger</button>
+  &nbsp;
+  <button onclick="setMode(7)">Mager</button>
 </div>
-<div style="margin-bottom: 10px; width: 700px; text-align: center;">
-    &nbsp;&nbsp;&nbsp;Toggle: &nbsp;
-    <button onclick="toggleNS()">N/S</button>
-    <button onclick="togglePillar(0)">West</button>
-    <button onclick="togglePillar(1)">North</button>
-    <button onclick="togglePillar(2)">South</button>
-    <button onclick="togglePlayerLoS()">LoS</button>
-    <!--<button onclick="toggleSpawns()">Spawns</button>
+<div style="margin-bottom: 10px; width: 700px; text-align: center;"> &nbsp;&nbsp;&nbsp;Toggle: &nbsp;
+  <button onclick="toggleNS()">N/S</button>
+  <button onclick="togglePillar(0)">West</button>
+  <button onclick="togglePillar(1)">North</button>
+  <button onclick="togglePillar(2)">South</button>
+  <button onclick="togglePlayerLoS()">LoS</button>
+  <!--<button onclick="toggleSpawns()">Spawns</button>
     <button onclick="toggleZukSpots()">Zuk</button>
     <button onclick="toggleNibblerSpawn()">Nib Spawn</button>
     <button onclick="toggleChecker()">Checkers</button>-->
-    <input id="wave" type="number" style="width: 64px; text-align: center" placeholder=" Wave #" max="66" min="1">
-    <button onClick="randomWave()">GO</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <button onClick="copySpawnURL()">Copy Spawn URL</button>
+  <input id="wave" type="number" style="width: 64px; text-align: center" placeholder=" Wave #" max="66" min="1">
+  <button onClick="randomWave()">GO</button>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <button onClick="copySpawnURL()">Copy Spawn URL</button>
 </div>
 <canvas id="map" class="south" onselectstart="return false" oncontextmenu="return false" style="
   "></canvas>
-	<br>Based on some code from <a href="https://bistools.github.io/inferno.html">Backseat's tool</a>.
+<br>
+Based on some code from <a href="https://bistools.github.io/inferno.html">Backseat's tool</a>. 
 <script>
 var SIZE = [1,2,3,3,1,4,3,4,1,1,1];
 var RANGE = [10,4,15,15,1,1,15,15,1,1,1];
@@ -299,9 +307,9 @@ document.addEventListener('keydown',function(e){
 		for(var i=0;i<mobs.length;i++){
 			url = url.concat(("00" + mobs[i][0]).slice(-2)).concat(("00" + mobs[i][1]).slice(-2)).concat(mobs[i][2]).concat(".")
 		}
-		if(pillarW=false){url = url.concat(".noW")}
-		if(pillarN=false){url = url.concat(".noN")}
-		if(pillarS=false){url = url.concat(".noS")}
+		if(pillarW = false){url = url.concat("noW")}
+		if(pillarN = false){url = url.concat("noN")}
+		if(pillarS = false){url = url.concat("noS")}
 		if(degen){url = url.concat(".degeN")}
 		copyQ(url);
 		alert("Spawn URL Copied!")
