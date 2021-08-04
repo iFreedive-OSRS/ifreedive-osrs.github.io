@@ -307,10 +307,10 @@ document.addEventListener('keydown',function(e){
 		for(var i=0;i<mobs.length;i++){
 			url = url.concat(("00" + mobs[i][0]).slice(-2)).concat(("00" + mobs[i][1]).slice(-2)).concat(mobs[i][2]).concat(".")
 		}
-		if(!pillarW){url = url.concat(".noWe")}
-		if(!pillarN){url = url.concat(".noN")}
-		if(!pillarS){url = url.concat(".noS")}
-		if(degen){url = url.concat(".degeN")}
+		if(!pillarW){url = url.concat(".noWe")};
+		if(!pillarN){url = url.concat(".noN")};
+		if(!pillarS){url = url.concat(".noS")};
+		if(degen){url = url.concat(".degeN")};
 		copyQ(url);
 		alert("Spawn URL Copied!")
 	}
