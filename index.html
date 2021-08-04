@@ -95,7 +95,7 @@ var img_sources = [
 	"bat-sized.png",
 	"blob-sized.png",
 	"blob-sized.png",
-	"nibbler-sized-west.png",
+	"melee-miniblob-sized.png",
 	"melee-sized.png",
 	"ranger-sized.png",
 	"mage-sized.png",
@@ -108,7 +108,7 @@ var img_sources_north = [
 	"bat-sized - Copy.png",
 	"blob-sized - Copy.png",
 	"blob-sized - Copy.png",
-	"nibbler-sized-west.png",
+	"melee-miniblob-sized - Copy.png",
 	"melee-sized - Copy.png",
 	"ranger-sized - Copy.png",
 	"mage-sized - Copy.png",
@@ -450,6 +450,8 @@ function doesCollide(x,y,s,x2,y2,s2){
 	return true;
 }
 function legalPosition(x,y,s,index){
+	var t = mobs[index][2]
+	
 	if(y-(s-1)<0 || x+(s-1)>28){
 		return false;
 	}
@@ -459,10 +461,11 @@ function legalPosition(x,y,s,index){
 			collision = collision | doesCollide(x,y,s,pillars[i][0],pillars[i][1],3);
 		}
 	}
-	if(mobs[i][2] != 4){
-		for(var i=0;i<mobs.length;i++){if (mobs[i][2] < 8){
-			if(i!=index  && mobs[i][2]!=4){
-				collision = collision | doesCollide(x,y,s,mobs[i][0],mobs[i][1],SIZE[mobs[i][2]]);
+	if(t != 4){
+		for(var i=0;i<mobs.length;i++){
+			if (mobs[i][2] < 8){
+				if(i!=index && mobs[i][2]!=4){
+					collision = collision | doesCollide(x,y,s,mobs[i][0],mobs[i][1],SIZE[mobs[i][2]]);
 			}
 		}}
 	}
@@ -574,7 +577,7 @@ function drawLOS(x,y,s,r,isNPC,color="red"){
 function drawWave(){
 	ctx.globalAlpha = 1;
 	ctx.clearRect(0,0,can.width,can.height);
-	var colors = ["cyan","grey","yellow","blue","purple","orange","lime","red"]
+	var colors = ["cyan","grey","yellow","blue","red","orange","lime","red"]
 	if (checker==true){checkerColor="#eee"}
 	else {checkerColor="#fff"}
 	for(var i=0;i<870;i++){
@@ -610,7 +613,7 @@ if(showZukSpots){ctx.globalAlpha = 0.35} else {ctx.globalAlpha = 0}
 		var r = RANGE[mobs[i][2]];
 		var c = colors[mobs[i][2]];
 		ctx.fillStyle = ctx.strokeStyle = c;
-		if (mobs[i][2] < 8 && mobs[i][2] != 4){
+		if (mobs[i][2] < 8){
 			ctx.fillRect(mobs[i][0]*size,(mobs[i][1]+1)*size,1*size,-1*size)
 			ctx.strokeRect(mobs[i][0]*size+1,(mobs[i][1]+1)*size-1,s*size,-s*size)
 		}
@@ -644,7 +647,7 @@ if(showZukSpots){ctx.globalAlpha = 0.35} else {ctx.globalAlpha = 0}
 			var t = tape[i][j]
 			if (i>=3){console.log(tape[i-3][j])}
 			if(t>0){ 
-				ctx.fillStyle = ["","grey","yellow","blue","purple","orange","lime","red"][t]
+				ctx.fillStyle = ["","grey","yellow","blue","red","orange","lime","red"][t]
 				ctx.fillRect(offset+size*(j),size*(i),size,size)
 			}else if((t==-2 || t==-3) && i>=3 && (tape[i-3][j]==2 || tape[i-3][j]==3)){
 				ctx.fillStyle = "black";
