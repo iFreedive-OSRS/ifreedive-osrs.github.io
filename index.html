@@ -610,7 +610,7 @@ if(showZukSpots){ctx.globalAlpha = 0.35} else {ctx.globalAlpha = 0}
 		var r = RANGE[mobs[i][2]];
 		var c = colors[mobs[i][2]];
 		ctx.fillStyle = ctx.strokeStyle = c;
-		if (mobs[i][2] < 8){
+		if (mobs[i][2] < 8 && mobs[i][2] != 4){
 			ctx.fillRect(mobs[i][0]*size,(mobs[i][1]+1)*size,1*size,-1*size)
 			ctx.strokeRect(mobs[i][0]*size+1,(mobs[i][1]+1)*size-1,s*size,-s*size)
 		}
@@ -625,7 +625,7 @@ if(showZukSpots){ctx.globalAlpha = 0.35} else {ctx.globalAlpha = 0}
 	drawLOS(selected[0],selected[1],s,r,mode>0)
 	ctx.fillStyle = ctx.strokeStyle = c
 	var blobAlready = false;
-	if (mode < 8 && mode != 4){
+	if (mode < 8){
 		ctx.fillRect(selected[0]*size,(selected[1]+1)*size,1*size,-1*size)
 		ctx.strokeRect(selected[0]*size,(selected[1]+1)*size,s*size,-s*size)
 	}
