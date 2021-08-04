@@ -610,7 +610,7 @@ if(showZukSpots){ctx.globalAlpha = 0.35} else {ctx.globalAlpha = 0}
 		var r = RANGE[mobs[i][2]];
 		var c = colors[mobs[i][2]];
 		ctx.fillStyle = ctx.strokeStyle = c;
-		if (mobs[i][2] < 8  && mobs[i][2]!=4){
+		if (mobs[i][2] < 8){
 			ctx.fillRect(mobs[i][0]*size,(mobs[i][1]+1)*size,1*size,-1*size)
 			ctx.strokeRect(mobs[i][0]*size+1,(mobs[i][1]+1)*size-1,s*size,-s*size)
 		}
