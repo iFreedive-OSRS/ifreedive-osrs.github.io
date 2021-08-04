@@ -316,9 +316,9 @@ document.addEventListener('keydown',function(e){
 	}
 function togglePillar(x){
 	filters[x] = !filters[x];
-	if(x=0){pillarW = !pillarW};
-	if(x=1){pillarN = !pillarN};
-	if(x=2){pillarS = !pillarS};
+	if(x===0){pillarW = !pillarW};
+	if(x===1){pillarN = !pillarN};
+	if(x===2){pillarS = !pillarS};
 	drawWave();
 }
 function toggleSpawns(){
